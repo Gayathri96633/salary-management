@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Management - Salary Management</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <style>
+       
+        .w3-content-container {
+            padding: 20px;
+            font-size: 20px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); 
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .w3-title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .w3-table-all {
+            width: 100%;
+            margin: 20px auto;
+        }
+        .w3-table-all th, .w3-table-all td {
+            padding: 10px;
+            text-align: center;
+        }
+        .add-department-button {
+            float: right;
+            margin-bottom: 10px;
+        }
+        .department-select {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="w3-content-container">
+       
+        <button class="w3-button w3-blue add-department-button" onclick="toggleDepartmentDropdown()">Add Department</button>
+
+        
+        <div id="departmentDropdown" class="w3-dropdown-content w3-bar-block w3-card-4" style="display: none;">
+            <button onclick="toggleDepartmentDropdown()" class="w3-bar-item w3-button w3-hover-light-grey">Close</button>
+            <button onclick="addDepartment('Human Resources')" class="w3-bar-item w3-button w3-hover-light-grey">Human Resources</button>
+            <button onclick="addDepartment('Customer Service')" class="w3-bar-item w3-button w3-hover-light-grey">Customer Service</button>
+            <button onclick="addDepartment('Research and Development')" class="w3-bar-item w3-button w3-hover-light-grey">Research and Development</button>
+            
+        </div>
+
+        <h2>Department Data</h2>
+        <table class="w3-table-all">
+            <thead>
+                <tr class="w3-dark-grey">
+                    <th>Department ID</th>
+                    <th>Department Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="departmentTable">
+                
+                <tr id="department-row-1">
+                    <td>1</td>
+                    <td>Finance</td>
+                    <td><button class="w3-button w3-red" onclick="deleteDepartment(1)">Delete</button></td>
+                </tr>
+                <tr id="department-row-2">
+                    <td>2</td>
+                    <td>IT</td>
+                    <td><button class="w3-button w3-red" onclick="deleteDepartment(2)">Delete</button></td>
+                </tr>
+                <tr id="department-row-3">
+                    <td>3</td>
+                    <td>Marketing</td>
+                    <td><button class="w3-button w3-red" onclick="deleteDepartment(3)">Delete</button></td>
+                </tr>
+                <tr id="department-row-4">
+                    <td>4</td>
+                    <td>Sales</td>
+                    <td><button class="w3-button w3-red" onclick="deleteDepartment(4)">Delete</button></td>
+                </tr>
+               
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let lastDepartmentId = 4; 
+
+        function toggleDepartmentDropdown() {
+            var dropdown = document.getElementById('departmentDropdown');
+            if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+                dropdown.style.display = 'block';
+            } else {
+                dropdown.style.display = 'none';
+            }
+        }
+
+        function addDepartment(name) {
+           
+            lastDepartmentId++;
+
+           
+            var tableBody = document.getElementById('departmentTable');
+            var newRow = document.createElement('tr');
+            newRow.setAttribute('id', 'department-row-' + lastDepartmentId);
+            newRow.innerHTML = `
+                <td>${lastDepartmentId}</td>
+                <td>${name}</td>
+                <td><button class="w3-button w3-red" onclick="deleteDepartment(${lastDepartmentId})">Delete</button></td>
+            `;
+            tableBody.appendChild(newRow);
+
+            
+            toggleDepartmentDropdown();
+        }
+
+        function deleteDepartment(id) {
+            console.log('Deleting department with ID ' + id);
+            var row = document.getElementById('department-row-' + id);
+            if (row) {
+                row.remove();
+            } else {
+                console.error('Department row with ID ' + id + ' not found.');
+            }
+        }
+    </script>
+</body>
+</html>
