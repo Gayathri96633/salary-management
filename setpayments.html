@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Payment</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .title {
+            text-align: center;
+        }
+        .payment-form {
+            display: grid;
+            grid-gap: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Set Payment</h1>
+        <form id="paymentForm" class="payment-form" action="emp-payphp.php" method="post">
+            <div class="form-group">
+                <label for="empid">Employee ID</label>
+                <input type="number" id="empid" name="empid" required>
+            </div>
+            <div class="form-group">
+                <label for="year">Select Year</label>
+                <input type="number" id="year" name="year" required>
+            </div>
+            <div class="form-group">
+                <label for="month">Select Month</label>
+                <select id="month" name="month" required>
+                    <option value="">Select Month</option>
+                    <option value="january">January</option>
+                    <option value="february">February</option>
+                    <option value="march">March</option>
+                    <option value="april">April</option>
+                    <option value="may">May</option>
+                    <option value="june">June</option>
+                    <option value="july">July</option>
+                    <option value="august">August</option>
+                    <option value="september">September</option>
+                    <option value="october">October</option>
+                    <option value="november">November</option>
+                    <option value="december">December</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="absence">Absence</label>
+                <input type="number" id="absence" name="absence" required>
+            </div>
+            <div class="form-group">
+                <label for="overtime">Overtime</label>
+                <input type="number" id="overtime" name="overtime" required>
+            </div>
+            <div class="form-group">
+                <label for="sbonus">Seasonal Bonus</label>
+                <input type="number" id="sbonus" name="sbonus" required>
+            </div>
+            <div class="form-group">
+                <label for="obonus">Other Bonus</label>
+                <input type="number" id="obonus" name="obonus" required>
+            </div>
+            <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+    </div>
+
+    <script>
+       
+        function submitForm() {
+           
+            var empid = document.getElementById("empid").value;
+            var year = document.getElementById("year").value;
+            var month = document.getElementById("month").value;
+            var absence = document.getElementById("absence").value;
+            var overtime = document.getElementById("overtime").value;
+            var sbonus = document.getElementById("sbonus").value;
+            var obonus = document.getElementById("obonus").value;
+
+           
+            if (!empid || !year || !month || !absence || !overtime || !sbonus || !obonus) {
+                alert("Please fill out all fields");
+                return;
+            }
+
+           
+            var formData = {
+                empid: empid,
+                year: year,
+                month: month,
+                absence: absence,
+                overtime: overtime,
+                sbonus: sbonus,
+                obonus: obonus
+            };
+
+            fetch('emp-payphp.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Payment set successfully');
+               
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Error setting payment');
+            });
+        }
+    </script>
+</body>
+</html>
