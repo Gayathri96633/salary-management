@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management - Salary Management</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .w3-content-container {
+            padding: 20px;
+            background-color: #fff; 
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 1200px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        }
+        .w3-title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .w3-table-all {
+            width: 100%;
+            margin-top: 20px;
+            overflow-x: auto; 
+            table-layout: fixed; 
+            border-collapse: collapse; 
+            text-align: left; 
+        }
+        .w3-table-all th, .w3-table-all td {
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            word-wrap: break-word; 
+        }
+        .w3-table-all th:first-child,
+        .w3-table-all td:first-child {
+            min-width: 50px;
+        }
+        .w3-table-all td:nth-child(3),
+        .w3-table-all td:nth-child(6),
+        .w3-table-all td:nth-child(7) { 
+            min-width: 120px;
+        }
+        .w3-table-all th:last-child,
+        .w3-table-all td:last-child {
+            min-width: 100px; 
+            max-width: 150px;
+        }
+        .add-employee-button {
+            float: right;
+            margin-bottom: 10px;
+        }
+        .employee-select {
+            width: 200px;
+        }
+        .set-salary-form {
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+    <div class="w3-content-container">
+        <h2 class="w3-title">Employee Data</h2>
+
+        
+        <button class="w3-button w3-blue add-employee-button" onclick="toggleEmployeeDropdown()">Add Employee</button>
+
+        
+        <div id="employeeDropdown" class="w3-dropdown-content w3-bar-block w3-card-4" style="display: none;">
+            <button onclick="toggleEmployeeDropdown()" class="w3-bar-item w3-button w3-hover-light-grey">Close</button>
+           
+        </div>
+
+        <table class="w3-table-all" id="employeeTable">
+            <thead>
+                <tr class="w3-dark-grey">
+                    <th>Employee ID</th>
+                    <th>Employee Name</th>
+                    <th>Date of Birth</th>
+                    <th>Email ID</th>
+                    <th>Gender</th>
+                    <th>Joining Date</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Department Name</th>
+                    <th>Managing Department</th>
+                    <th>Bank Account Number</th>
+                    <th>Role</th>
+                    <th>Salary</th> 
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="employeeTableBody">
+               
+                <tr id="employee-row-1">
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>1990-01-01</td>
+                    <td>johndoe@gmail.com</td>
+                    <td>Male</td>
+                    <td>2020-01-15</td>
+                    <td>123-456-7890</td>
+                    <td>123 ks layout, bangalore,india,560078</td>
+                    <td>Finance</td>
+                    <td>Finance</td>
+                    <td>123456789</td>
+                    <td>Manager</td>
+                    <td class="employee-salary"></td> 
+                    <td><button class="w3-button w3-red" onclick="deleteEmployee(1)">Delete</button></td>
+                </tr>
+                <tr id="employee-row-2">
+                    <td>2</td>
+                    <td>Jane Smith</td>
+                    <td>1995-05-15</td>
+                    <td>janesmith@example.com</td>
+                    <td>Female</td>
+                    <td>2021-03-10</td>
+                    <td>987-654-3210</td>
+                    <td>456 Avenue, Town, Country, Zip</td>
+                    <td>IT</td>
+                    <td>IT</td>
+                    <td>987654321</td>
+                    <td>Engineer</td>
+                    <td class="employee-salary"></td> 
+                    <td><button class="w3-button w3-red" onclick="deleteEmployee(2)">Delete</button></td>
+                </tr> 
+            </tbody>
+        </table>
+        <button class="w3-button w3-green add-employee-button" onclick="toggleSetSalaryForm()">Set Salary</button>
+        <div class="set-salary-form" id="setSalaryForm">
+            <h2 class="w3-title">Set Employee Salary</h2>
+            <form onsubmit="return setEmployeeSalary()">
+                <label for="employeeSelect">Select Employee:</label>
+                <select id="employeeSelect" class="employee-select" required>
+                    <option value="">Select Employee</option>
+                </select>
+                <br><br>
+                <label for="salaryInput">Enter Salary:</label>
+                <input type="number" id="salaryInput" required>
+                <br><br>
+                <button type="submit" class="w3-button w3-green">Set Salary</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let lastEmployeeId = 2; 
+
+        function toggleEmployeeDropdown() {
+            var dropdown = document.getElementById('employeeDropdown');
+            var setSalaryForm = document.getElementById('setSalaryForm');
+            dropdown.style.display = 'block';
+            setSalaryForm.style.display = 'none';
+        }
+
+        function toggleSetSalaryForm() {
+            var setSalaryForm = document.getElementById('setSalaryForm');
+            var dropdown = document.getElementById('employeeDropdown');
+            setSalaryForm.style.display = 'block';
+            dropdown.style.display = 'none'; 
+
+          
+            populateEmployeeSelectOptions();
+        }
+
+        function closeDropdown() {
+            var dropdown = document.getElementById('employeeDropdown');
+            dropdown.style.display = 'none';
+        }
+
+        function addEmployeeToTable(name, dob, email, gender, sdate, phone, address, depname, managedepid, bacc, jobtitle) {
+           
+            lastEmployeeId++;
+
+            var tableBody = document.getElementById('employeeTableBody');
+            var newRow = document.createElement('tr');
+            newRow.setAttribute('id', 'employee-row-' + lastEmployeeId);
+            newRow.innerHTML = `
+                <td>${lastEmployeeId}</td>
+                <td>${name}</td>
+                <td>${dob}</td>
+                <td>${email}</td>
+                <td>${gender}</td>
+                <td>${sdate}</td>
+                <td>${phone}</td>
+                <td>${address}</td>
+                <td>${depname}</td>
+                <td>${managedepid}</td>
+                <td>${bacc}</td>
+                <td>${jobtitle}</td>
+                <td class="employee-salary"></td> <!-- Empty cell for salary -->
+                <td><button class="w3-button w3-red" onclick="deleteEmployee(${lastEmployeeId})">Delete</button></td>
+            `;
+            tableBody.appendChild(newRow);
+
+            
+            var selectEmployee = document.getElementById('employeeSelect');
+            var option = document.createElement('option');
+            option.value = lastEmployeeId;
+            option.textContent = name;
+            selectEmployee.appendChild(option);
+        }
+
+        function deleteEmployee(id) {
+            console.log('Deleting employee with ID ' + id);
+            var row = document.getElementById('employee-row-' + id);
+            if (row) {
+                row.remove();
+                removeEmployeeFromSelect(id);
+            } else {
+                console.error('Employee row with ID ' + id + ' not found.');
+            }
+        }
+
+        function removeEmployeeFromSelect(employeeId) {
+            var selectEmployee = document.getElementById('employeeSelect');
+            var options = selectEmployee.options;
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].value == employeeId) {
+                    selectEmployee.removeChild(options[i]);
+                    break;
+                }
+            }
+        }
+
+        function populateEmployeeSelectOptions() {
+            var selectEmployee = document.getElementById('employeeSelect');
+            selectEmployee.innerHTML = '<option value="">Select Employee</option>';
+
+            var tableRows = document.querySelectorAll('#employeeTable tbody tr');
+            tableRows.forEach(function(row) {
+                var employeeId = row.getAttribute('id').replace('employee-row-', '');
+                var employeeName = row.cells[1].textContent;
+                var option = document.createElement('option');
+                option.value = employeeId;
+                option.textContent = employeeName;
+                selectEmployee.appendChild(option);
+            });
+        }
+
+        function setEmployeeSalary() {
+            var employeeSelect = document.getElementById('employeeSelect');
+            var salaryInput = document.getElementById('salaryInput');
+
+            var employeeId = employeeSelect.value;
+            var salary = salaryInput.value;
+
+            if (employeeId && salary) {
+                var employeeName = employeeSelect.options[employeeSelect.selectedIndex].text;
+                var employeeRow = document.getElementById('employee-row-' + employeeId);
+                if (employeeRow) {
+                    var salaryCell = employeeRow.querySelector('.employee-salary');
+                    if (salaryCell) {
+                        salaryCell.textContent = salary;
+                    } else {
+                        var salaryCell = document.createElement('td');
+                        salaryCell.textContent = salary;
+                        salaryCell.className = 'employee-salary';
+                        employeeRow.appendChild(salaryCell);
+                    }
+                }
+                alert('Salary set successfully for ' + employeeName);
+                return false;
+            } else {
+                alert('Please select an employee and enter salary.');
+                return false;
+            }
+        }
+
+       
+        addEmployeeToTable('Emily Johnson', '1992-08-20', 'emilyjohnson@example.com', 'Female', '2022-01-05', '555-123-4567', '789 Street, Some City, USA', 'HR', 'HR', '555123456', 'HR Manager');
+        addEmployeeToTable('Michael Brown', '1988-04-12', 'michaelbrown@example.com', 'Male', '2021-11-15', '444-987-6543', '321 Avenue, Other Town, USA', 'Sales', 'Sales', '444987654', 'Sales Executive');
+        addEmployeeToTable('Sarah Williams', '1993-10-30', 'sarahwilliams@example.com', 'Female', '2022-02-20', '333-456-7890', '456 Street, Another City, USA', 'Operations', 'Operations', '333456789', 'Operations Manager');
+        addEmployeeToTable('David Miller', '1990-07-15', 'davidmiller@example.com', 'Male', '2021-12-10', '222-987-6543', '555 Road, Anytown, USA', 'Marketing', 'Marketing', '222987654', 'Marketing Specialist');
+        addEmployeeToTable('Emma Wilson', '1994-03-25', 'emmawilson@example.com', 'Female', '2021-10-05', '111-456-7890', '987 Boulevard, Every City, USA', 'Engineering', 'Engineering', '111456789', 'Software Engineer');
+    </script>
+</body>
+</html>
