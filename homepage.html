@@ -1,40 +1,108 @@
 <!DOCTYPE html>
-<html>
-<title>Welcome to Payroll</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Salary Management</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <style>
+        
+        .w3-sidebar {
+            z-index: 3;
+            width: 250px;
+            font-weight: bold;
+        }
+        .w3-sidebar img {
+            width: 100%;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+        .w3-main {
+            margin-left: 250px; 
+        }
+        .w3-banner-img {
+            width: 100%;
+            height: auto;
+            position: relative; 
+        }
+        .w3-banner-text {
+            position: absolute;
+            top: 10%; 
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: #fff; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); 
+            z-index: 1;
+            width: 100%; 
+            box-sizing: border-box;
+        }
+        .w3-content-container {
+            padding: 20px;
+            font-size: 20px;
+            text-align: center;
+        }
+        .w3-title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
 <body>
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-light-blue w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
-<div class="w3-container w3-dark-grey">
-<h4>Menu</h4>
-</div>
-<img src="payroll.jpg" alt="Snow" style="width:100%;padding-top: 15px;padding-bottom: 15px">
-<div class="w3-container w3-dark-grey">
-<h4>Payroll system</h4>
-<div class="w3-bar-block">
-<dl>
-<dt><a href="home.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white w3-red">Home</a> </dt>
-<dt><a href="department.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Department</a> </dt>
-<dd></dd>
-<dt><a href="employee.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"> Employee </a></dt>
-<dt><a href="employee-setsalary.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Set salary</a> </dt>
-<dt><a href="employee-payment.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Set Payment</a> </dt>
-<dt><a href="employee-payslip.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Pay slip</a> </dt>
-<dt><a href="employee-payhistory.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Payment history</a> </dt>
-<dt><a href="index.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Log Out</a> </dt>
-</dl>
-</div>
-</nav>
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:290px;margin-right:-10px;margin-top: -5px;margin-bottom: 0px">
-<!-- Header -->
-<div class="w3-display-container w3-text-blue" style="font-size: 50px">
-<img src="images/banner.jpeg" alt="Lights" style="height: 100px ; width:100% ;object-fit:cover">
-<div class="w3-display-middle w3-large" > <h1 >Payroll Management system</h1></div>
-</div>
-<div class="w3-display-container w3-text-white">
-<img src="home.jpg" alt="Lights" style="width:100%">
-<div class="w3-display-topmiddle" style="font-size: 20px"><p><br><br><br><h2><center>Welcome to payroll system</center></h2></p><br><center><h3>This is the homepage</h3></center></div>
-</div>
-</div>
+   
+    <nav class="w3-sidebar w3-light-blue w3-collapse w3-top w3-large" id="mySidebar">
+        <div class="w3-container w3-dark-grey">
+            <h4>Menu</h4>
+        </div>
+        <img src="https://outlookmoney.com/public/uploads/article/gallery/1bf121e8a9efa2dbd7eac9e16bd6bb8e.jpg" alt="Snow">
+        <div class="w3-container w3-dark-grey">
+            <h4>Salary Management System</h4>
+            <div class="w3-bar-block">
+                <dl>
+                    <dt><a href="home.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white w3-red">Home</a></dt>
+                    <dt><a href="department.html" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Department</a></dt>
+                    <dt><a href="employee.html" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Employee</a></dt>
+                    <dt><a href="setsalaryy.html" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Set Salary</a></dt>
+                    <dt><a href="setpayments.html" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Set Payment</a></dt>
+                    <dt><a href="payslipp.html" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Pay Slip</a></dt>
+                    <dt><a href="paymenthistory.html" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Payment History</a></dt>
+                    <dt><a href="index.php" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Log Out</a></dt>
+                </dl>
+            </div>
+        </div>
+    </nav>
+
+   
+    <div class="w3-main" style="margin-left:250px;"> 
+        
+        <div class="w3-banner-text">
+            <h1 class="w3-title">Welcome to</h1>
+            <h1>Salary Management System</h1>
+        </div>
+
+       
+        <div class="w3-display-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMAXyKYESlcAMCFjstOLyNWGUlAIka2KVwPHBRpIgmCkdf2F4pvSU4qT-JU1M7f-E2S1s&usqp=CAU" alt="Banner Image" class="w3-banner-img">
+        </div>
+
+        
+        <div class="w3-content-container">
+            <h2>Additional Content</h2>
+            <p>You can add more content here as needed.</p>add
+            <center><h3>This is the homepage</h3></center>
+        </div>
+    </div>
+
+   
+    <script>
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+    }
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+    }
+</script>
+
 </body>
 </html>
